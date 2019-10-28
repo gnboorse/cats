@@ -41,6 +41,12 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/ErrorMessage"
+        "500":
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorMessage"
   /cats/{id}:
     get:
       summary: Returns a cat by ID
@@ -59,8 +65,20 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/CatData"
+        "400":
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorMessage"
         "404":
           description: Cat object not found by ID
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorMessage"
+        "500":
+          description: Internal Server Error
           content:
             application/json:
               schema:
@@ -88,14 +106,20 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/CatData"
+        "400":
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorMessage"
         "404":
           description: Cat object not found by ID
           content:
             application/json:
               schema:
                 $ref: "#/components/schemas/ErrorMessage"
-        "400":
-          description: Bad request
+        "500":
+          description: Internal Server Error
           content:
             application/json:
               schema:
@@ -117,8 +141,20 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/CatData"
+        "400":
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorMessage"
         "404":
           description: Cat object not found by ID
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorMessage"
+        "500":
+          description: Internal Server Error
           content:
             application/json:
               schema:
