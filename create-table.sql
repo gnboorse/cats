@@ -1,0 +1,8 @@
+CREATE TABLE IF NOT EXISTS cats(
+    id serial PRIMARY KEY,
+    name VARCHAR(100) NOT NULL,
+    breed VARCHAR(100) NOT NULL,
+    color VARCHAR(100) NOT NULL,
+    age SMALLINT NOT NULL,
+    image_url VARCHAR(400) NOT NULL
+);

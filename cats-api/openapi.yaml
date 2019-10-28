@@ -1,0 +1,181 @@
+openapi: 3.0.0
+info:
+  title: Cats API
+  description: REST API for managing records about cats at an animal shelter
+  version: 1.0.0
+servers:
+  - url: https://cats.boorse.app/api/v1
+    description: Production server
+  - url: http://localhost:8080/v1
+    description: Local development server
+paths:
+  /cats:
+    get:
+      summary: Returns a list of all cats
+      responses:
+        "200":
+          description: A JSON array of cat objects
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CatDataArray"
+
+    post:
+      summary: Creates a new record
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CatData"
+      responses:
+        "201":
+          description: The cat object created
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CatData"
+        "400":
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorMessage"
+  /cats/{id}:
+    get:
+      summary: Returns a cat by ID
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+            format: int32
+            minimum: 1
+      responses:
+        "200":
+          description: The cat object found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CatData"
+        "404":
+          description: Cat object not found by ID
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorMessage"
+    put:
+      summary: Updates a cat by ID
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+            format: int32
+            minimum: 1
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CatData"
+      responses:
+        "200":
+          description: The updated cat object
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CatData"
+        "404":
+          description: Cat object not found by ID
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorMessage"
+        "400":
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorMessage"
+    delete:
+      summary: Deletes a cat by ID
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+            format: int32
+            minimum: 1
+      responses:
+        "200":
+          description: The cat object that was deleted
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CatData"
+        "404":
+          description: Cat object not found by ID
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorMessage"
+  /version:
+    get:
+      summary: Gets the API version
+      responses:
+        "200":
+          description: The API version object
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Version"
+
+components:
+  schemas:
+    CatData:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        breed:
+          type: string
+        color:
+          type: string
+        age:
+          type: integer
+        image_url:
+          type: string
+      required:
+        - name
+        - breed
+        - color
+        - age
+        - image_url
+    CatDataArray:
+      type: array
+      items:
+        $ref: "#/components/schemas/CatData"
+    Version:
+      type: object
+      properties:
+        app:
+          type: string
+        version:
+          type: string
+        build_timestamp:
+          type: string
+    ErrorMessage:
+      type: object
+      properties:
+        code:
+          type: integer
+        title:
+          type: string
+        message:
+          type: string
