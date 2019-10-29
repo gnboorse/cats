@@ -1,1 +1,5 @@
-<app-cat-list-item [data]="data" [expandedView]="true"></app-cat-list-item>
+<app-cat-list-item
+  [data]="data"
+  [expandedView]="true"
+  (deletedEvent)="handleItemDeletedEvent($event)"
+></app-cat-list-item>

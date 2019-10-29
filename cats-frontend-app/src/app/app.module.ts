@@ -21,6 +21,7 @@ import { EditCatComponent } from './edit-cat/edit-cat.component';
 import { ViewCatComponent } from './view-cat/view-cat.component';
 import { CatListItemComponent } from './cat-list-item/cat-list-item.component';
 import { CatDeleteDialogComponent } from './cat-delete-dialog/cat-delete-dialog.component';
+import { NotFoundComponent } from './not-found/not-found.component';
 
 
 
@@ -32,7 +33,8 @@ import { CatDeleteDialogComponent } from './cat-delete-dialog/cat-delete-dialog.
     EditCatComponent,
     ViewCatComponent,
     CatListItemComponent,
-    CatDeleteDialogComponent
+    CatDeleteDialogComponent,
+    NotFoundComponent
   ],
   imports: [
     BrowserModule,

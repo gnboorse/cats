@@ -4,3 +4,7 @@
 .header-link {
   cursor: pointer;
 }
+
+.header-link:focus {
+  outline-width: 0;
+}

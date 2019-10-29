@@ -4,6 +4,7 @@ import { CatsListComponent } from './cats-list/cats-list.component'
 import { EditCatComponent } from './edit-cat/edit-cat.component';
 import { NewCatComponent } from './new-cat/new-cat.component';
 import { ViewCatComponent } from './view-cat/view-cat.component';
+import { NotFoundComponent } from './not-found/not-found.component';
 
 
 const routes: Routes = [
@@ -31,6 +32,14 @@ const routes: Routes = [
     redirectTo: '/list',
     pathMatch: 'full'
   },
+  {
+    path: 'notfound',
+    component: NotFoundComponent
+  },
+  {
+    path: '**',
+    component: NotFoundComponent
+  }
 ];
 
 @NgModule({

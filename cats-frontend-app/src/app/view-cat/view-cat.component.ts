@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { CatData } from '../cat-data.model';
 import { ApiClientService } from '../api-client.service';
 
@@ -10,7 +10,10 @@ import { ApiClientService } from '../api-client.service';
 })
 export class ViewCatComponent implements OnInit {
 
-  constructor(private route: ActivatedRoute, private apiClientService: ApiClientService) { }
+  constructor(
+    private router: Router,
+    private route: ActivatedRoute,
+    private apiClientService: ApiClientService) { }
 
   id: number;
 
@@ -21,7 +24,13 @@ export class ViewCatComponent implements OnInit {
   getCat(id: number) {
     this.apiClientService.findCatById(id).subscribe((data: CatData) => {
       this.data = data;
-    }, error => console.log(error));
+    }, error => this.router.navigate(['/notfound']));
+  }
+
+  handleItemDeletedEvent(data: CatData) {
+    this.apiClientService.deleteCatById(data.id).subscribe((data: CatData) => {
+      this.router.navigate(['/list'])
+    }, error => console.log(error))
   }
 
   ngOnInit() {
@@ -30,8 +39,6 @@ export class ViewCatComponent implements OnInit {
       this.getCat(this.id);
     });
   }
-
-
 
   ngOnDestroy() {
     this.sub.unsubscribe();
