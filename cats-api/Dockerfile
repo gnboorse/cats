@@ -11,12 +11,13 @@ COPY data.go .
 COPY repository.go .
 
 RUN go get -u github.com/gorilla/mux
+RUN go get -u github.com/gorilla/handlers
 RUN go get -u github.com/lib/pq
 
 ENV TIME=${buildTimestamp}
 ENV VERSION=${buildVersion}
 RUN GOOS=linux CGO_ENABLED=0 go build -ldflags="-w -s -X 'main.BuildTimestamp=$TIME' -X 'main.BuildVersion=$VERSION'" -o /go/bin/api .
-    
+
 FROM scratch
 
 WORKDIR /go/bin/

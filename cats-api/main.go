@@ -22,9 +22,10 @@ func main() {
 	r.HandleFunc("/v1/cats/{id}", UpdateCatHandler).Methods("PUT")
 	r.HandleFunc("/v1/cats/{id}", DeleteCatHandler).Methods("DELETE")
 	r.HandleFunc("/v1/version", GetVersionHandler).Methods("GET")
+	r.Methods("OPTIONS").HandlerFunc(PreflightHandler)
 	r.NotFoundHandler = r.NewRoute().HandlerFunc(NotFoundHandler).GetHandler()
 	r.MethodNotAllowedHandler = r.NewRoute().HandlerFunc(MethodNotAllowedHandler).GetHandler()
-	http.Handle("/", corsHandler(r))
+	http.Handle("/", r)
 
 	fmt.Println("Initializing postgres DB connection")
 	err := InitDB()
@@ -41,15 +42,5 @@ func main() {
 	err = http.ListenAndServe(":"+port, r)
 	if err != nil {
 		fmt.Println(err)
-	}
-}
-
-func corsHandler(h http.Handler) http.HandlerFunc {
-	return func(w http.ResponseWriter, r *http.Request) {
-		if r.Method == "OPTIONS" {
-			//handle preflight in here
-		} else {
-			h.ServeHTTP(w, r)
-		}
 	}
 }

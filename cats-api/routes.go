@@ -196,6 +196,12 @@ func MethodNotAllowedHandler(w http.ResponseWriter, r *http.Request) {
 	writeResponse(w, message, http.StatusMethodNotAllowed)
 }
 
+// PreflightHandler for taking care of CORS preflight requests
+func PreflightHandler(w http.ResponseWriter, r *http.Request) {
+	enableCors(&w)
+	w.WriteHeader(http.StatusOK)
+}
+
 func writeResponse(w http.ResponseWriter, data interface{}, status int) {
 	w.WriteHeader(status)
 	w.Header().Add("Content-Type", "application/json")
@@ -212,4 +218,6 @@ func makeErrorMessage(code int, message string) ErrorMessage {
 
 func enableCors(w *http.ResponseWriter) {
 	(*w).Header().Set("Access-Control-Allow-Origin", "*")
+	(*w).Header().Add("Access-Control-Allow-Methods", "POST, OPTIONS, GET, DELETE, PUT")
+	(*w).Header().Add("Access-Control-Allow-Headers", "content-type")
 }
