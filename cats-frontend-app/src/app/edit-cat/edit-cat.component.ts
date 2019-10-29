@@ -39,4 +39,11 @@ export class EditCatComponent implements OnInit {
     this.sub.unsubscribe();
   }
 
+  handleSubmit() {
+    this.apiClientService.updateCat(this.data, this.data.id).subscribe((data: CatData) => {
+      this.router.navigate(['/view', data.id]);
+    }, error => {
+      console.log(error);
+    })
+  }
 }

@@ -10,7 +10,7 @@ import { environment } from '../environments/environment';
 export class ApiClientService {
 
   constructor(private http: HttpClient) {
-    this.apiUrl = "https://cats.boorse.app/api/v1";
+    this.apiUrl = "http://localhost:8080/v1";
   }
 
   apiUrl: string;
@@ -29,5 +29,9 @@ export class ApiClientService {
 
   deleteCatById(id: number): Observable<CatData> {
     return this.http.delete<CatData>(`${this.apiUrl}/cats/${id}`);
+  }
+
+  updateCat(data: CatData, id: number): Observable<CatData> {
+    return this.http.put<CatData>(`${this.apiUrl}/cats/${id}`, data);
   }
 }

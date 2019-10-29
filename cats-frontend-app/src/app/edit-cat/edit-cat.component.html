@@ -1,1 +1,90 @@
-<p>edit-cat works! Name: {{ data.name }}</p>
+<form (ngSubmit)="handleSubmit()" #newCat="ngForm">
+  <mat-card class="spaced-card">
+    <mat-card-header>
+      <mat-card-title>Edit cat information</mat-card-title>
+      <!-- <mat-card-subtitle>You've wandered off.</mat-card-subtitle> -->
+    </mat-card-header>
+    <mat-card-content>
+      <mat-form-field class="input-fill" appearance="outline">
+        <mat-label for="name">Name</mat-label>
+        <input
+          id="name"
+          name="name"
+          [(ngModel)]="data.name"
+          type="text"
+          placeholder="Name"
+          matInput
+          required
+        />
+      </mat-form-field>
+      <mat-form-field class="input-fill" appearance="outline">
+        <mat-label for="sex">Sex</mat-label>
+        <mat-select [(ngModel)]="data.sex" id="sex" name="sex" required>
+          <mat-option value="male">Male</mat-option>
+          <mat-option value="female">Female</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field class="input-fill" appearance="outline">
+        <mat-label for="breed">Breed</mat-label>
+        <input
+          id="breed"
+          name="breed"
+          [(ngModel)]="data.breed"
+          type="text"
+          placeholder="Breed"
+          matInput
+          required
+        />
+      </mat-form-field>
+      <mat-form-field class="input-fill" appearance="outline">
+        <mat-label for="color">Color</mat-label>
+        <input
+          id="color"
+          name="color"
+          [(ngModel)]="data.color"
+          type="text"
+          placeholder="Color"
+          matInput
+          required
+        />
+      </mat-form-field>
+      <mat-form-field class="input-fill" appearance="outline">
+        <mat-label for="age">Age (years)</mat-label>
+        <input
+          id="age"
+          name="age"
+          [(ngModel)]="data.age"
+          type="number"
+          placeholder="Age (years)"
+          matInput
+          required
+        />
+      </mat-form-field>
+      <mat-form-field class="input-fill" appearance="outline">
+        <mat-label for="image_url">Image URL</mat-label>
+        <input
+          id="image_url"
+          name="image_url"
+          [(ngModel)]="data.image_url"
+          type="url"
+          placeholder="Image URL"
+          matInput
+          required
+        />
+      </mat-form-field>
+    </mat-card-content>
+    <mat-card-actions>
+      <button
+        type="submit"
+        [disabled]="!newCat.form.valid"
+        mat-raised-button
+        color="accent"
+      >
+        SAVE
+      </button>
+      <button mat-button [routerLink]="['/view', data.id]">
+        CANCEL
+      </button>
+    </mat-card-actions>
+  </mat-card>
+</form>
