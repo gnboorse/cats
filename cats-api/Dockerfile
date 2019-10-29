@@ -11,7 +11,6 @@ COPY data.go .
 COPY repository.go .
 
 RUN go get -u github.com/gorilla/mux
-RUN go get -u github.com/gorilla/handlers
 RUN go get -u github.com/lib/pq
 
 ENV TIME=${buildTimestamp}
