@@ -1,0 +1,12 @@
+<h1 mat-dialog-title>Are you sure you want to delete {{ data.name }}?</h1>
+<div mat-dialog-content>
+  <p>This action cannot be undone.</p>
+</div>
+<div mat-dialog-actions>
+  <button mat-raised-button color="accent" (click)="onCancel()" cdkFocusInitial>
+    Cancel
+  </button>
+  <button mat-button (click)="onSubmit()">
+    Proceed
+  </button>
+</div>

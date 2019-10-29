@@ -1,5 +1,9 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
 import { CatData } from '../cat-data.model';
+import { MatDialog } from '@angular/material/dialog';
+
+import { CatDeleteDialogComponent } from '../cat-delete-dialog/cat-delete-dialog.component';
+
 
 @Component({
   selector: 'app-cat-list-item',
@@ -8,12 +12,29 @@ import { CatData } from '../cat-data.model';
 })
 export class CatListItemComponent implements OnInit {
 
-  constructor() { }
+  constructor(public dialog: MatDialog) { }
 
   @Input() data: CatData;
   @Input() expandedView: boolean;
+  @Output() deletedEvent = new EventEmitter();
+
 
   ngOnInit() {
   }
+
+  deleteOnClick() {
+    const dialogRef = this.dialog.open(CatDeleteDialogComponent, {
+      width: '400px',
+      data: this.data
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed with result: ' + result);
+      if (result) {
+        this.deletedEvent.emit(this.data);
+      }
+    });
+  }
+
 
 }

@@ -1,5 +1,9 @@
 <div>
   <div *ngFor="let cat of cats">
-    <app-cat-list-item [data]="cat" [expandedView]="false"></app-cat-list-item>
+    <app-cat-list-item
+      [data]="cat"
+      [expandedView]="false"
+      (deletedEvent)="handleItemDeletedEvent($event)"
+    ></app-cat-list-item>
   </div>
 </div>
