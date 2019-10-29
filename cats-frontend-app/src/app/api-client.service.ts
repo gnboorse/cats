@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpResponse } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { CatData } from './cat-data.model';
+import { environment } from '../environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -9,7 +10,11 @@ import { CatData } from './cat-data.model';
 export class ApiClientService {
 
   constructor(private http: HttpClient) {
-    this.apiUrl = "http://localhost:8080/v1";
+    if (environment.production) {
+      this.apiUrl = "https://cats.boorse.app/api/v1";
+    } else {
+      this.apiUrl = "http://localhost:8080/v1";
+    }
   }
 
   apiUrl: string;
