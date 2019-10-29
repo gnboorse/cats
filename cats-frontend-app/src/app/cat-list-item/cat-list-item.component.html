@@ -1,0 +1,46 @@
+<mat-card class="list-card">
+  <mat-card-header>
+    <img
+      *ngIf="!expandedView"
+      mat-card-avatar
+      class="list-card-image"
+      src="{{ data.image_url }}"
+      alt="Photo of a Shiba Inu"
+    />
+
+    <mat-card-title>{{ data.name }}</mat-card-title>
+    <mat-card-subtitle
+      >{{ data.color | titlecase }} {{ data.breed }}, {{ data.age }} years
+      old</mat-card-subtitle
+    >
+  </mat-card-header>
+  <img
+    *ngIf="expandedView"
+    mat-card-image
+    src="{{ data.image_url }}"
+    alt="Photo of {{ data.name }}"
+  />
+
+  <mat-card-actions>
+    <button
+      *ngIf="!expandedView"
+      mat-raised-button
+      color="accent"
+      [routerLink]="['/view', data.id]"
+    >
+      VIEW
+    </button>
+    <button *ngIf="!expandedView" mat-button [routerLink]="['/edit', data.id]">
+      EDIT
+    </button>
+    <button
+      *ngIf="expandedView"
+      mat-raised-button
+      color="accent"
+      [routerLink]="['/edit', data.id]"
+    >
+      EDIT
+    </button>
+    <button mat-button>DELETE</button>
+  </mat-card-actions>
+</mat-card>
