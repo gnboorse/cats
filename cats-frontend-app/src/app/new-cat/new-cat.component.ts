@@ -32,7 +32,6 @@ export class NewCatComponent implements OnInit {
   }
 
   handleSubmit() {
-    // todo...
     this.apiClientService.createCat(this.data).subscribe((data: CatData) => {
       this.router.navigate(['/view', data.id]);
     }, error => {

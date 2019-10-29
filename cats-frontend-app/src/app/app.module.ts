@@ -25,6 +25,7 @@ import { ViewCatComponent } from './view-cat/view-cat.component';
 import { CatListItemComponent } from './cat-list-item/cat-list-item.component';
 import { CatDeleteDialogComponent } from './cat-delete-dialog/cat-delete-dialog.component';
 import { NotFoundComponent } from './not-found/not-found.component';
+import { CatEditFormComponent } from './cat-edit-form/cat-edit-form.component';
 
 
 
@@ -37,7 +38,8 @@ import { NotFoundComponent } from './not-found/not-found.component';
     ViewCatComponent,
     CatListItemComponent,
     CatDeleteDialogComponent,
-    NotFoundComponent
+    NotFoundComponent,
+    CatEditFormComponent
   ],
   imports: [
     BrowserModule,
