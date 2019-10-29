@@ -9,7 +9,7 @@ import { CatData } from './cat-data.model';
 export class ApiClientService {
 
   constructor(private http: HttpClient) {
-    this.apiUrl = "https://cats.boorse.app/api/v1";
+    this.apiUrl = "http://localhost:8080/v1";
   }
 
   apiUrl: string;
