@@ -20,7 +20,7 @@
       </mat-form-field>
       <mat-form-field class="input-fill" appearance="outline">
         <mat-label for="sex">Sex</mat-label>
-        <mat-select id="sex" name="sex" required>
+        <mat-select [(ngModel)]="data.sex" id="sex" name="sex" required>
           <mat-option value="male">Male</mat-option>
           <mat-option value="female">Female</mat-option>
         </mat-select>

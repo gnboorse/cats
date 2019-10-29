@@ -10,8 +10,8 @@
 
     <mat-card-title
       >{{ data.name }}
-      <ng-template *ngIf="data.sex === 'female'; else male">♀</ng-template>
-      <ng-template #male>♂️</ng-template>
+      <span *ngIf="data.sex == 'female'">♀</span>
+      <span *ngIf="data.sex == 'male'">️️♂️</span>
     </mat-card-title>
     <mat-card-subtitle
       >{{ data.color | titlecase }} {{ data.breed }}, {{ data.age }} years
