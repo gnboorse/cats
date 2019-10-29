@@ -9,11 +9,11 @@ import (
 
 const (
 	connectionString = "postgres://postgres:g3erVpeUgEUNh8Fj@db/postgres?sslmode=disable"
-	selectAllQuery   = "select id, name, breed, color, age, image_url from cats order by id asc"
-	insertQuery      = "insert into cats (name, breed, color, age, image_url) values ($1, $2, $3, $4, $5) returning id, name, breed, color, age, image_url"
-	selectByIDQuery  = "select id, name, breed, color, age, image_url from cats where id = $1"
-	updateQuery      = "update cats set name = $1, breed = $2, color = $3, age = $4, image_url = $5 where id = $6 returning id, name, breed, color, age, image_url"
-	deleteQuery      = "delete from cats where id = $1 returning id, name, breed, color, age, image_url"
+	selectAllQuery   = "select id, name, sex, breed, color, age, image_url from cats order by id asc"
+	insertQuery      = "insert into cats (name, sex, breed, color, age, image_url) values ($1, $2, $3, $4, $5, $6) returning id, name, sex, breed, color, age, image_url"
+	selectByIDQuery  = "select id, name, sex, breed, color, age, image_url from cats where id = $1"
+	updateQuery      = "update cats set name = $1, sex = $2, breed = $3, color = $4, age = $5, image_url = $6 where id = $7 returning id, name, sex, breed, color, age, image_url"
+	deleteQuery      = "delete from cats where id = $1 returning id, name, sex, breed, color, age, image_url"
 )
 
 // DB global database connection
@@ -54,6 +54,7 @@ func RepositoryGetAll() ([]CatData, error) {
 		err = rows.Scan(
 			&entity.ID,
 			&entity.Name,
+			&entity.Sex,
 			&entity.Breed,
 			&entity.Color,
 			&entity.Age,
@@ -77,8 +78,10 @@ func RepositoryCreate(cat *CatData) (*CatData, error) {
 	defer stmt.Close()
 
 	var entity CatData
-	err = stmt.QueryRow(cat.Name, cat.Breed, cat.Color, cat.Age, cat.ImageURL).Scan(&entity.ID,
+	err = stmt.QueryRow(cat.Name, cat.Sex, cat.Breed, cat.Color, cat.Age, cat.ImageURL).Scan(
+		&entity.ID,
 		&entity.Name,
+		&entity.Sex,
 		&entity.Breed,
 		&entity.Color,
 		&entity.Age,
@@ -101,6 +104,7 @@ func RepositoryGetOne(id int) (*CatData, error) {
 	err = stmt.QueryRow(id).Scan(
 		&entity.ID,
 		&entity.Name,
+		&entity.Sex,
 		&entity.Breed,
 		&entity.Color,
 		&entity.Age,
@@ -123,9 +127,10 @@ func RepositoryUpdate(cat *CatData, id int) (*CatData, error) {
 	defer stmt.Close()
 
 	var entity CatData
-	err = stmt.QueryRow(cat.Name, cat.Breed, cat.Color, cat.Age, cat.ImageURL, id).Scan(
+	err = stmt.QueryRow(cat.Name, cat.Sex, cat.Breed, cat.Color, cat.Age, cat.ImageURL, id).Scan(
 		&entity.ID,
 		&entity.Name,
+		&entity.Sex,
 		&entity.Breed,
 		&entity.Color,
 		&entity.Age,
@@ -150,6 +155,7 @@ func RepositoryDelete(id int) (*CatData, error) {
 	err = stmt.QueryRow(id).Scan(
 		&entity.ID,
 		&entity.Name,
+		&entity.Sex,
 		&entity.Breed,
 		&entity.Color,
 		&entity.Age,

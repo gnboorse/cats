@@ -179,6 +179,8 @@ components:
           type: integer
         name:
           type: string
+        sex:
+          type: string
         breed:
           type: string
         color:
@@ -189,6 +191,7 @@ components:
           type: string
       required:
         - name
+        - sex
         - breed
         - color
         - age

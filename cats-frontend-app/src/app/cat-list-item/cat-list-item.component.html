@@ -8,7 +8,11 @@
       alt="Photo of a Shiba Inu"
     />
 
-    <mat-card-title>{{ data.name }}</mat-card-title>
+    <mat-card-title
+      >{{ data.name }}
+      <ng-template *ngIf="data.sex === 'female'; else male">♀</ng-template>
+      <ng-template #male>♂️</ng-template>
+    </mat-card-title>
     <mat-card-subtitle
       >{{ data.color | titlecase }} {{ data.breed }}, {{ data.age }} years
       old</mat-card-subtitle

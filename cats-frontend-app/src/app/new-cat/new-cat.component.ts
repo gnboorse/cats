@@ -23,6 +23,7 @@ export class NewCatComponent implements OnInit {
     this.data = {
       id: null,
       name: null,
+      sex: null,
       breed: null,
       color: null,
       age: null,

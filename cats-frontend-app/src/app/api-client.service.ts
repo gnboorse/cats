@@ -10,11 +10,7 @@ import { environment } from '../environments/environment';
 export class ApiClientService {
 
   constructor(private http: HttpClient) {
-    if (environment.production) {
-      this.apiUrl = "https://cats.boorse.app/api/v1";
-    } else {
-      this.apiUrl = "http://localhost:8080/v1";
-    }
+    this.apiUrl = "https://cats.boorse.app/api/v1";
   }
 
   apiUrl: string;

@@ -4,6 +4,7 @@ package main
 type CatData struct {
 	ID       uint32 `json:"id"`
 	Name     string `json:"name"`
+	Sex      string `json:"sex"`
 	Breed    string `json:"breed"`
 	Color    string `json:"color"`
 	Age      uint32 `json:"age"`
