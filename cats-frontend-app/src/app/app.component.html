@@ -1,6 +1,8 @@
 <div>
   <mat-toolbar color="primary">
-    <span>Herding Cats</span>
+    <span class="header-link" routerLink="/list" routerLinkActive="true"
+      >Herding Cats</span
+    >
 
     <mat-icon
       class="example-icon"
@@ -10,7 +12,13 @@
     >
 
     <span class="toolbar-filler"></span>
-    <button mat-raised-button color="accent">New</button>
+    <a
+      mat-raised-button
+      color="accent"
+      routerLink="/new"
+      routerLinkActive="true"
+      >New</a
+    >
   </mat-toolbar>
   <router-outlet></router-outlet>
 </div>

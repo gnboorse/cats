@@ -1,14 +1,12 @@
 <div>
   <mat-card class="list-card" *ngFor="let cat of cats">
     <mat-card-header>
-      <!-- <div mat-card-avatar> -->
       <img
         mat-card-avatar
         class="list-card-image"
         src="{{ cat.image_url }}"
         alt="Photo of a Shiba Inu"
       />
-      <!-- </div> -->
 
       <mat-card-title>{{ cat.name }}</mat-card-title>
       <mat-card-subtitle
@@ -16,9 +14,12 @@
         old</mat-card-subtitle
       >
     </mat-card-header>
-    <mat-card-content> </mat-card-content>
+    <mat-card-content></mat-card-content>
     <mat-card-actions>
-      <button mat-raised-button color="accent">EDIT</button>
+      <button mat-raised-button color="accent" [routerLink]="['/view', cat.id]">
+        VIEW
+      </button>
+      <button mat-button [routerLink]="['/edit', cat.id]">EDIT</button>
       <button mat-button>DELETE</button>
     </mat-card-actions>
   </mat-card>

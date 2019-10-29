@@ -17,6 +17,7 @@ import { CatsListComponent } from './cats-list/cats-list.component';
 import { HttpClientModule } from '@angular/common/http';
 import { NewCatComponent } from './new-cat/new-cat.component';
 import { EditCatComponent } from './edit-cat/edit-cat.component';
+import { ViewCatComponent } from './view-cat/view-cat.component';
 
 
 
@@ -25,7 +26,8 @@ import { EditCatComponent } from './edit-cat/edit-cat.component';
     AppComponent,
     CatsListComponent,
     NewCatComponent,
-    EditCatComponent
+    EditCatComponent,
+    ViewCatComponent
   ],
   imports: [
     BrowserModule,
