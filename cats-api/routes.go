@@ -12,6 +12,7 @@ import (
 
 // GetCatsHandler for the /cats endpoint
 func GetCatsHandler(w http.ResponseWriter, r *http.Request) {
+	enableCors(&w)
 	// get all entities
 	retrieved, err := RepositoryGetAll()
 
@@ -27,6 +28,7 @@ func GetCatsHandler(w http.ResponseWriter, r *http.Request) {
 
 // CreateCatHandler for the /cats endpoint
 func CreateCatHandler(w http.ResponseWriter, r *http.Request) {
+	enableCors(&w)
 	// decode request body
 	cat := &CatData{}
 	err := json.NewDecoder(r.Body).Decode(cat)
@@ -55,6 +57,7 @@ func CreateCatHandler(w http.ResponseWriter, r *http.Request) {
 
 // GetCatHandler for the /cats/{id} endpoint
 func GetCatHandler(w http.ResponseWriter, r *http.Request) {
+	enableCors(&w)
 	// get ID from path params
 	vars := mux.Vars(r)
 	if val, ok := vars["id"]; ok {
@@ -90,6 +93,7 @@ func GetCatHandler(w http.ResponseWriter, r *http.Request) {
 
 // UpdateCatHandler for the /cats/{id} endpoint
 func UpdateCatHandler(w http.ResponseWriter, r *http.Request) {
+	enableCors(&w)
 	// decode request body
 	cat := &CatData{}
 	err := json.NewDecoder(r.Body).Decode(cat)
@@ -135,6 +139,7 @@ func UpdateCatHandler(w http.ResponseWriter, r *http.Request) {
 
 // DeleteCatHandler for the /cats/{id} endpoint
 func DeleteCatHandler(w http.ResponseWriter, r *http.Request) {
+	enableCors(&w)
 	// get ID from path params
 	vars := mux.Vars(r)
 	if val, ok := vars["id"]; ok {
@@ -168,6 +173,7 @@ func DeleteCatHandler(w http.ResponseWriter, r *http.Request) {
 
 // GetVersionHandler for the /version endpoint
 func GetVersionHandler(w http.ResponseWriter, r *http.Request) {
+	enableCors(&w)
 	versionInfo := Version{
 		App:            "Cats API",
 		Version:        BuildVersion,
@@ -178,12 +184,14 @@ func GetVersionHandler(w http.ResponseWriter, r *http.Request) {
 
 // NotFoundHandler for when the URL requested is not found
 func NotFoundHandler(w http.ResponseWriter, r *http.Request) {
+	enableCors(&w)
 	message := makeErrorMessage(http.StatusNotFound, "The URL requested was not found")
 	writeResponse(w, message, http.StatusNotFound)
 }
 
 // MethodNotAllowedHandler for when the user requests an endpoint with an invalid HTTP method
 func MethodNotAllowedHandler(w http.ResponseWriter, r *http.Request) {
+	enableCors(&w)
 	message := makeErrorMessage(http.StatusMethodNotAllowed, "Method not allowed on the endpoint requested")
 	writeResponse(w, message, http.StatusMethodNotAllowed)
 }
@@ -200,4 +208,8 @@ func makeErrorMessage(code int, message string) ErrorMessage {
 		Title:   http.StatusText(code),
 		Message: message,
 	}
+}
+
+func enableCors(w *http.ResponseWriter) {
+	(*w).Header().Set("Access-Control-Allow-Origin", "*")
 }
